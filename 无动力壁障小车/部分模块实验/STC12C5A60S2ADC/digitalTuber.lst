@@ -1,0 +1,79 @@
+C51 COMPILER V9.01   DIGITALTUBER                                                          10/11/2018 13:40:49 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE DIGITALTUBER
+OBJECT MODULE PLACED IN .\digitalTuber.obj
+COMPILER INVOKED BY: H:\professional\keil\C51\BIN\C51.EXE ..\..\digitalTuber.c BROWSE DEBUG OBJECTEXTEND PRINT(.\digital
+                    -Tuber.lst) OBJECT(.\digitalTuber.obj)
+
+line level    source
+
+   1          #include "STC12C5A60S2.h"
+   2          //#include "inter"
+   3          #define uint unsigned int
+   4          #define uchar unsigned char
+   5          
+   6          sbit weixuan1 = P2^2;
+   7          sbit weixuan2  = P2^3;
+   8          //uchar duanxuan = P0;
+   9          
+  10          uint SMG_code[]={0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90,0x88,0x83,0xC6,0xA1,0x86,0x8E};
+  11          //uchar number = 123;
+  12          
+  13          void Delay300ms()               //@12.000MHz
+  14          {
+  15   1              unsigned char i, j, k;
+  16   1      
+  17   1              i = 14;
+  18   1              j = 174;
+  19   1              k = 224;
+  20   1              do
+  21   1              {
+  22   2                      do
+  23   2                      {
+  24   3                              while (--k);
+  25   3                      } while (--j);
+  26   2              } while (--i);
+  27   1      }
+  28          
+  29          
+  30          void main()
+  31          {
+  32   1              uchar s ;
+  33   1          weixuan1 = 0;
+  34   1              weixuan2 = 0;
+  35   1      
+  36   1              while(1)
+  37   1          {
+  38   2                         for(s = 0;s < 10; s++)
+  39   2                         {
+  40   3                              weixuan1 = 0;
+  41   3                              weixuan2= 0;
+  42   3                       P0 = SMG_code[s];
+  43   3                      Delay300ms();
+  44   3                              P0 = 0xff;
+  45   3                              weixuan1 = 1;
+  46   3                              weixuan2 =1;
+  47   3      
+  48   3                      }
+  49   2                      
+  50   2          }
+  51   1      
+  52   1      }
+  53          
+
+C51 COMPILER V9.01   DIGITALTUBER                                                          10/11/2018 13:40:49 PAGE 2   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     49    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     32    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

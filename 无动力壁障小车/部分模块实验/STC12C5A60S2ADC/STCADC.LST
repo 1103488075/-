@@ -1,0 +1,47 @@
+C51 COMPILER V9.01   STCADC                                                                10/13/2018 19:24:27 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE STCADC
+OBJECT MODULE PLACED IN STCADC.OBJ
+COMPILER INVOKED BY: H:\professional\keil\C51\BIN\C51.EXE STCADC.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <STC12C5A60S2.H>
+   2          
+   3          
+   4          #define uint unsigned int
+   5          #define uchar unsigned char
+   6          
+   7          uint shownum = 1024;//显示数值
+   8          
+   9          uint JD = 1024;
+  10          
+  11          #include "595.h"//显示相关头文件
+  12          #include "ADC.h"//ADC相关头文件
+  13          
+  14          void main()
+  15          {
+  16   1          Timer0Init();//设置数码管T0中断
+  17   1              P1ASF = 0x01 ;//设置0x01，P1^0为模拟引脚s，高阻态模式
+  18   1          while(1)
+  19   1          {
+  20   2          //shownum = LVBUO();//ADC数据经过滤波
+  21   2          JD = (LVBUO()/1024.0) * 180;//转化为cm
+  22   2              //shownum = JD;
+  23   2          }
+  24   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    512    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     48       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

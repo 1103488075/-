@@ -1,0 +1,62 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\我的compute\Desktop\避障车部分模块\部分模块实验\STC12C5A60S2ADC\STCADC.uvproj
+Project File Date:  10/11/2018
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling STCADC.c...
+ADC.H(1): error C100: unprintable character 0xEF skipped
+ADC.H(1): error C100: unprintable character 0xBB skipped
+ADC.H(1): error C100: unprintable character 0xBF skipped
+ADC.H(41): error C202: 'JD': undefined identifier
+ADC.H(43): error C202: 'JD': undefined identifier
+ADC.H(45): error C202: 'JD': undefined identifier
+STCADC.C(19): error C202: 'JD': undefined identifier
+目标未创建
+Build target 'Target 1'
+compiling STCADC.c...
+ADC.H(41): error C202: 'JD': undefined identifier
+ADC.H(43): error C202: 'JD': undefined identifier
+ADC.H(45): error C202: 'JD': undefined identifier
+STCADC.C(19): error C202: 'JD': undefined identifier
+目标未创建
+Build target 'Target 1'
+compiling STCADC.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?TIMER0INIT?STCADC
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?GUIZHONG?STCADC
+Program Size: data=61.0 xdata=0 code=1485
+creating hex file from "STCADC"...
+"STCADC" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling STCADC.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?TIMER0INIT?STCADC
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?GUIZHONG?STCADC
+Program Size: data=61.0 xdata=0 code=1485
+creating hex file from "STCADC"...
+"STCADC" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling STCADC.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?GUIZHONG?STCADC
+Program Size: data=61.0 xdata=0 code=1488
+creating hex file from "STCADC"...
+"STCADC" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling STCADC.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?GUIZHONG?STCADC
+Program Size: data=61.0 xdata=0 code=1482
+creating hex file from "STCADC"...
+"STCADC" - 0 Error(s), 1 Warning(s).

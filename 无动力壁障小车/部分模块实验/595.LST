@@ -1,0 +1,135 @@
+C51 COMPILER V9.01   595                                                                   10/08/2018 22:21:24 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE 595
+OBJECT MODULE PLACED IN .\595.obj
+COMPILER INVOKED BY: H:\professional\keil\C51\BIN\C51.EXE ..\595.c BROWSE DEBUG OBJECTEXTEND OBJECT(.\595.obj)
+
+line level    source
+
+   1          #include <STC12C5A60S2.h>
+   2          
+   3          sbit SCLK = P2^2 ;
+   4          sbit RCLK = P2^1 ;
+   5          sbit DIO = P2^0 ;
+   6          int i , NUM=0;
+   7          unsigned int number = 5555;
+   8          #define uint unsigned int
+   9          #define uchar unsigned 
+  10          
+  11          unsigned int  duanxuan_code[]={0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90,0x88,0x83,0xC6,0xA1,0x86,
+             -0x8E};
+  12          unsigned int weixuan_code[]={0x01,0x02,0x04,0x08};
+  13          //*************************************************
+  14          void Timer0Init()//1毫秒@11.0592MHz
+  15          {
+  16   1              AUXR |=  0x80 ;//设置定时器1T模式
+  17   1              TMOD = 0X01 ;// 0000 0001
+  18   1              
+  19   1              TL0 = 0xCD;     //设置定时初值
+  20   1              TH0 = 0xD4;     //设置定时初值
+  21   1              
+  22   1              EA = 1 ; //全局中断开关
+  23   1              ET0 = 1 ;
+  24   1              TR0 = 1 ; //定时器中断开关
+  25   1      }
+  26          void delay(int x)//延迟函数
+  27          {
+  28   1              int i , j ;
+  29   1              for(i=x ; i>0 ; i--)
+  30   1                      for(j=120 ; j>0 ; j--);
+  31   1      }
+  32          void while_byte(uint X )
+  33          {
+  34   1              uint i ;
+  35   1              SCLK = 0 ;
+  36   1              for(i=0;i<8;i++)
+  37   1              {
+  38   2                      if(X & 0x80)//读取第八位的值
+  39   2                      {
+  40   3                              DIO = 1 ;//准备数据
+  41   3                              SCLK = 1 ;//拉高时钟，送出数据
+  42   3                              SCLK = 0 ;//拉高时钟，送出数据
+  43   3                      }
+  44   2                      else
+  45   2                      {
+  46   3                              DIO = 0 ;
+  47   3                              SCLK = 1 ;
+  48   3                              SCLK = 0 ;
+  49   3                      }
+  50   2                      X <<= 1 ;//数据移位
+  51   2              }
+  52   1      }
+  53          //*************************************************
+  54          void SHOW_ONE(uint duan , uint wei)//显示一位
+C51 COMPILER V9.01   595                                                                   10/08/2018 22:21:24 PAGE 2   
+
+  55          {
+  56   1              RCLK = 0 ;
+  57   1      
+  58   1              while_byte(duanxuan_code[duan]);//发送段选数
+  59   1              while_byte(weixuan_code[wei]);//发送位选数
+  60   1      
+  61   1              RCLK = 1 ;//更新显示
+  62   1              delay(5);
+  63   1              RCLK = 0 ;
+  64   1      }
+  65          //************************************************
+  66          void CLOSE_SHOW()//关闭显示
+  67          {
+  68   1              RCLK = 0 ;
+  69   1              while_byte(0xff);//发送段选数据
+  70   1              while_byte(0x00);//发送位选数据
+  71   1      
+  72   1              RCLK = 1 ;//更新显示
+  73   1              RCLK = 0 ;
+  74   1      }
+  75          //************************************************
+  76          void SHOW_ALL()
+  77          {
+  78   1              SHOW_ONE(number / 1000,3);//显示千位
+  79   1              SHOW_ONE(number / 100 % 10,2);//显示百位
+  80   1              SHOW_ONE(number / 10 % 10,1);//显示十位
+  81   1              SHOW_ONE(number % 10,0);//显示个位
+  82   1      
+  83   1              CLOSE_SHOW();//关闭显示平衡亮度
+  84   1      }
+  85          void main()
+  86          {
+  87   1          Timer0Init();
+  88   1          while(1)
+  89   1          {
+  90   2              //SHOW_ALL(number);
+  91   2          }
+  92   1      
+  93   1      }
+  94          //*************************************************
+  95          void T0_DO() interrupt 1 //定时器0初始函数
+  96          {
+  97   1              TL0 = 0xCD;             //设置定时初值
+  98   1              TH0 = 0xD4;             //设置定时初值
+  99   1              
+ 100   1              NUM++ ;
+ 101   1              if (NUM >= 1)//定时器累加16ms刷新一次，刷新率 60fps
+ 102   1              {
+ 103   2                      NUM = 0 ;
+ 104   2                      SHOW_ALL();//显示
+ 105   2              }
+ 106   1      }
+ 107          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    332    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     46    ----
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   595                                                                   10/08/2018 22:21:24 PAGE 3   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
